@@ -21,9 +21,9 @@
 				</canvas>
 			</div>
 			<div id="testInputs">
-				<label for="number">I see the number: </label><input id="numberInput" name="number" type="text" value="" autofocus /><button id="nextButton">Next</button>
+				<label for="number">I see the number: </label><input id="numberInput" name="number" type="text" value="" autofocus onkeydown="setTimeout(inputKeydown);" /><button id="nextButton">Next</button>
 				<br />
-				<button id="noNumberButton">I don't see a number</button>
+				<button id="noNumberButton">I don't see a number (x)</button>
 			</div>
 		</div>
 		<div id="rightbar" class="contentcontainer">
@@ -70,3 +70,8 @@
 	</body>
 	<script type="text/javascript" src="./colorblindness.js"></script>
 </html>
+
+
+
+
+
