@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+			Color blindness severity test
+		</title>
+		<link href="./style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div id="header" class="contentcontainer">
+			<h1>
+				Color Blindness Test
+			</h1>
+		</div>
+		<div id="content" class="contentcontainer">
+			<div id="canvasframe">
+				<canvas id="numberCanvas" width="450" height="300">
+					Your browser is not supported by this site.<br />
+					Please upgrade to a more recent version.
+				</canvas>
+			</div>
+			<div id="testInputs">
+				<label for="number">I see the number: </label><input id="numberInput" name="number" type="text" value="" autofocus /><button id="nextButton">Next</button>
+				<br />
+				<button id="noNumberButton">I don't see a number</button>
+			</div>
+		</div>
+		<div id="rightbar" class="contentcontainer">
+			<div class="resultdiv">
+				<h2>Protanopia</h2>
+				<br />
+				<span id="protanopiaText">No results yet.</span>
+				<div class="percentBarContainer" id="protanopiaBarContainer">
+					<div class="percentBar" id="protanopiaBar">
+					</div>
+				</div>
+			</div>
+			<div class="resultdiv">
+				<h2>Deuteranopia</h2>
+				<br />
+				<span id="deuteranopiaText">No results yet.</span>
+				<div class="percentBarContainer" id="deuteranopiaBarContainer">
+					<div class="percentBar" id="deuteranopiaBar">
+					</div>
+				</div>
+			</div>
+			<div class="resultdiv">
+				<h2>Tritanopia</h2>
+				<br />
+				<span id="tritanopiaText">No results yet.</span>
+				<div class="percentBarContainer" id="tritanopiaBarContainer">
+					<div class="percentBar" id="tritanopiaBar">
+					</div>
+				</div>
+			</div>
+			<div class="resultdiv">
+				<h2>Overall</h2>
+				<br />
+				<span id="overallText">No results yet.</span>
+				<div class="percentBarContainer" id="overallBarContainer">
+					<div class="percentBar" id="overallBar">
+					</div>
+				</div>
+			</div>
+		</div>
+		<canvas id="prerenderCanvas" width="30" height="20">
+			
+		</canvas>
+	</body>
+	<script type="text/javascript" src="./colorblindness.js"></script>
+</html>

@@ -1,0 +1,161 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
+#prerenderCanvas{
+	visibility: hidden;
+	position: absolute;
+}
+
+body{
+	background-color: #333333;
+	font-family: "Open Sans", sans-serif;
+}
+
+h1{
+	font-weight: 300;
+	color: #FFBB00;
+	margin: 30px 10px 0px 10px;
+	font-size: 40px;
+	line-height: 0px;
+}
+
+h2{
+	display: inline;
+	line-height: 1em;
+	font-size: 1.1em;
+}
+
+textarea,
+div [contenteditable="true"]{
+	font-size: 14px;
+	border: 2px #DDDDDD groove;
+	outline: none;
+	background-color: #FFFFFF;
+	white-space: pre;
+	overflow-y: auto;
+}
+
+button{
+	border: 2px #DDDDDD outset;
+	background-image: linear-gradient(to bottom, #FFFFFF, #EEEEEE);
+	padding: 3px;
+	cursor: pointer;
+	outline: none;
+	border-radius: 5px;
+}
+
+button:hover{
+	border: 2px #DDDDDD outset;
+	background-color: #FFFFFF;
+	background-image: none;
+}
+
+button:active{
+	border: 2px #DDDDDD inset;
+	background-image: linear-gradient(to top, #FFFFFF, #EEEEEE);
+}
+
+input[type="text"]{
+	border: 2px #DDDDDD groove;
+	outline: none;
+	height: 14px;
+	padding: 2px;
+}
+
+.contentcontainer{
+	position: absolute;
+	border: 1px #000000 solid;
+	background-color: #555555;
+}
+
+/*
+======== Layout ======== 
+*/
+
+#header{
+	top: 10px;
+	right: 10px;
+	left: 10px;
+	height: 70px;
+}
+
+#rightbar,
+#content{
+	top: 90px;
+}
+
+#content{
+	left: 10px;
+	bottom: 10px;
+	right: 320px;
+}
+
+#rightbar{
+	right: 10px;
+	bottom: 10px;
+	width: 300px;
+}
+
+/*
+======== /Layout ======== 
+*/
+
+#content{
+	text-align: center;
+	padding-top: 10px;
+}
+
+#canvasframe{
+	background-color: #000000;
+	padding: 10px;
+	margin: 0px 10px;
+}
+
+#testInputs{
+	border: 1px #000000 solid;
+	background-color: #AAAAAA;
+	padding: 10px;
+	margin: 10px;
+}
+
+#numberInput{
+	width: 40px;
+	height: 15px;
+}
+
+#nextButton{
+	margin-left: 5px;
+}
+
+#noNumberButton{
+	margin: 5px;
+}
+
+.resultdiv{
+	border: 1px #000000 solid;
+	background-color: #AAAAAA;
+	padding: 10px;
+	margin: 10px;
+}
+
+.percentBarContainer{
+	height: 20px;
+	border: 1px #000000 solid;
+	background: linear-gradient(to bottom, #555555, #666666);
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.percentBar{
+	height: 100%;
+	border-right: 1px #000000 solid;
+	background: linear-gradient(to bottom, #FFFFFF, #DDDDDD);
+	width: 0%;
+	margin-left: -1px;
+}
+
+
+
