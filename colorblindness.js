@@ -30,25 +30,44 @@ function Test(){
 	var renderer = new Renderer();
 	
 	var number = 0;
+	var difficulty = 0;
+	// Float between 0 and 1
 	var mode = 0;
-	// 0 = protanopia
-	// 1 = deuteranopia
-	// 3 = tritanopia
-		
+	var modes = [
+		 "Protanopia"
+		,"Deuteranopia"
+		,"Tritanopia"
+	];
 	
 	next();
 	
 	function next(){
+		
 		mode = testsTaken % 3;
 		number = Math.round(Math.random()*99);
-		renderer.render(number);
+		if(mode == 0){
+			difficulty += 0.1;
+			if(difficulty > 1){
+				difficulty = 0.1;
+			}
+		}
+		renderer.render(number, mode, difficulty);
 		testsTaken++;
+		
+		document.getElementById("currentDifficulty").innerHTML = Math.round(difficulty * 10);
+		document.getElementById("currentType").innerHTML = modes[mode];
 	}
 	
 	function evaluate(inputNumber){
+		document.getElementById("previousDifficulty").innerHTML = Math.round(difficulty * 10);
+		document.getElementById("previousType").innerHTML = modes[mode];
+		
 		Results.allTotal++;
 		if(inputNumber == number){
 			Results.allCorrect++;
+			
+			document.getElementById("previousCorrect").innerHTML = "Correct: "+number;
+			
 			switch(mode){
 				case 0:
 					Results.protanopiaCorrect++;
@@ -59,6 +78,12 @@ function Test(){
 				case 2:
 					Results.tritanopiaCorrect++;
 				break;
+			}
+		} else {
+			if(inputNumber == 101){
+				document.getElementById("previousCorrect").innerHTML = "Skipped. Was "+number;
+			} else {
+				document.getElementById("previousCorrect").innerHTML = "Incorrect: <s>"+inputNumber+"</s> "+number;
 			}
 		}
 		switch(mode){
@@ -111,33 +136,57 @@ function Test(){
 
 function Renderer(){
 	
-	function render(number){
+	function render(number, mode, difficulty){
+		difficulty = 1 - difficulty;
+		
 		prerender(number);
 	
 		numberCanvas.width = (Config.numberPixelSize + Config.numberPixelMargin) * prerenderCanvas.width + Config.numberPixelMargin;
 		numberCanvas.height = (Config.numberPixelSize + Config.numberPixelMargin) * prerenderCanvas.height + Config.numberPixelMargin;
-	
-	
-		var imageData = prerenderContext.getImageData(0, 0, prerenderCanvas.width, prerenderCanvas.height).data;
-	
-		for(var i = 0; i < imageData.length; i += 4){
-			//var r = 0;
-			//var g = 0;
-			//var b = 255;
 		
-			var r = 255;
-			var g = 255;
-			var b = 0;
+		
+		var imageData = prerenderContext.getImageData(0, 0, prerenderCanvas.width, prerenderCanvas.height).data;
+		
+		var r0 = 0;
+		var g0 = 0;
+		var b0 = 0;
+		switch(mode){
+			case 0: // protanopia
+				g0 = Math.round(Math.random()*80 * (2-difficulty)) + 40;
+				b0 = Math.round(Math.random()*80 * (2-difficulty)) + 40;
+			break;
+			case 1: // deuteranopia
+				r0 = Math.round(Math.random()*80 * (2-difficulty)) + 40;
+				b0 = Math.round(Math.random()*80 * (2-difficulty)) + 40;
+			break;
+			case 2: // tritanopia
+				r0 = Math.round(Math.random()*80 * (2-difficulty)) + 40;
+				g0 = Math.round(Math.random()*80 * (2-difficulty)) + 40;
+			break;
+		}
+		
+		for(var i = 0; i < imageData.length; i += 4){
+			var r = r0;
+			var g = g0;
+			var b = b0;
 		
 			if(imageData[i] < 200){
-				r -= Math.round(Math.random()*50 + 30);
-			} else {
-				g -= Math.round(Math.random()*50 + 30);
+				switch(mode){
+					case 0: // protanopia
+						r += Math.round(Math.random() * 90 * difficulty + 100 * difficulty + 65);
+					break;
+					case 1: // deuteranopia
+						g += Math.round(Math.random() * 90 * difficulty + 100 * difficulty + 65);
+					break;
+					case 2: // tritanopia
+						b += Math.round(Math.random() * 90 * difficulty + 100 * difficulty + 65);
+					break;
+				}
 			}
 		
-			r -= Math.round(Math.random()*20);
-			g -= Math.round(Math.random()*20);
-			b -= Math.round(Math.random()*50);
+			r += Math.round((Math.random()-0.5)*20);
+			g += Math.round((Math.random()-0.5)*20);
+			b += Math.round((Math.random()-0.5)*50);
 		
 			r = minmax(r, 0, 255);
 			g = minmax(g, 0, 255);
@@ -188,20 +237,30 @@ document.getElementById("numberInput").onkeydown = function(e){
 	setTimeout(filterInputField);
 	
 	if(e.which == 13){ // Enter
-		if(inputField.value == ""){
-			test.skip();
-		} else {
-			var number = inputField.value;
-			inputField.value = "";
-			
-			number = number.replace(/[^0-9]*/g, "");
-			number = Math.round(number);
-			test.evaluate(number);
-		}
+		next();
 	} else if(e.which == 88){ // X
-		inputField.value = "";
-		test.skip();
+		skip();
 	}
+}
+
+function next(){
+	var inputField = document.getElementById("numberInput");
+	if(inputField.value == ""){
+		test.skip();
+	} else {
+		var number = inputField.value;
+		inputField.value = "";
+
+		number = number.replace(/[^0-9]*/g, "");
+		number = Math.round(number);
+		test.evaluate(number);
+	}
+}
+
+function skip(){
+	var inputField = document.getElementById("numberInput");
+	inputField.value = "";
+	test.skip();
 }
 
 function filterInputField(){

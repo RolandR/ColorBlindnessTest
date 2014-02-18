@@ -21,9 +21,22 @@
 				</canvas>
 			</div>
 			<div id="testInputs">
-				<label for="number">I see the number: </label><input id="numberInput" name="number" type="text" value="" autofocus onkeydown="setTimeout(inputKeydown);" /><button id="nextButton">Next</button>
-				<br />
-				<button id="noNumberButton">I don't see a number (x)</button>
+				<div class="testInfo">
+					<h2>Previous Test</h2><br />
+					<span id="previousType">(None)</span><br />
+					Difficulty: <span id="previousDifficulty">0</span>/10<br />
+					<span id="previousCorrect"></span>
+				</div>
+				<div id="inputsContainer">
+					<label for="number">I see the number: </label><input id="numberInput" name="number" type="text" value="" autofocus onkeydown="setTimeout(inputKeydown);" /><button id="nextButton" onclick="next();" title="Tip: Press Enter">Next</button>
+					<br />
+					<button id="noNumberButton" onclick="skip();">I don't see a number (x)</button>
+				</div>
+				<div class="testInfo">
+					<h2>Current Test</h2><br />
+					<span id="currentType"></span><br />
+					Difficulty: <span id="currentDifficulty">0</span>/10<br />
+				</div>
 			</div>
 		</div>
 		<div id="rightbar" class="contentcontainer">
@@ -63,10 +76,18 @@
 					</div>
 				</div>
 			</div>
+			<div id="info">
+				This is free software, published under the <a href="https://www.gnu.org/licenses/gpl.html">GNU General Public License</a>.<br />
+				Copyright 2014 Roland Rytz - <a href="https://github.com/RolandR/ColorBlindnessTest">Github</a>
+			</div>
 		</div>
+		
+		
 		<canvas id="prerenderCanvas" width="30" height="20">
 			
 		</canvas>
+		
+		
 	</body>
 	<script type="text/javascript" src="./colorblindness.js"></script>
 </html>

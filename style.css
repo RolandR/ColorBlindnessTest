@@ -28,6 +28,20 @@ h2{
 	font-size: 1.1em;
 }
 
+a{
+	color: #FFBB00;
+	text-decoration: none;
+}
+
+a:visited{
+	color: #FFBB00;
+}
+
+a:hover{
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
 textarea,
 div [contenteditable="true"]{
 	font-size: 14px;
@@ -119,6 +133,22 @@ input[type="text"]{
 	background-color: #AAAAAA;
 	padding: 10px;
 	margin: 10px;
+	text-align: center;
+}
+
+#inputsContainer{
+	display: inline-block;
+	height: 100%;
+	border: #555555 solid;
+	border-width: 0px 1px;
+	width: 300px;
+}
+
+.testInfo{
+	width: 150px;
+	display: inline-block;
+	font-size: 0.7em;
+	vertical-align: top;
 }
 
 #numberInput{
@@ -157,5 +187,11 @@ input[type="text"]{
 	margin-left: -1px;
 }
 
-
+#info{
+	position: absolute;
+	bottom: 0px;
+	margin: 10px;
+	font-size: 0.9em;
+	color: #FFFFFF;
+}
 
