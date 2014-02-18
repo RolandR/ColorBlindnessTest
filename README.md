@@ -1,4 +1,4 @@
-ColorBlindnessTest
+Color Blindness Test
 ==================
 
 A more detailed test for color blindness.
